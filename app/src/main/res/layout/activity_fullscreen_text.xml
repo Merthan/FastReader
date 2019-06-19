@@ -1,0 +1,104 @@
+
+<layout xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="vm" type="com.gmail.me2development.fastreader.ui.viewmodels.FullscreenTextViewModel"/>
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+                 android:background="#0099cc"
+                 tools:context="com.gmail.me2development.fastreader.ui.activities.FullscreenTextActivity"
+    >
+
+        <!-- The primary full-screen view. This can be replaced with whatever view
+             is needed to present your content, e.g. VideoView, SurfaceView,
+             TextureView, etc. -->
+
+
+
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fullscreen_content"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:keepScreenOn="true"
+                android:textColor="#33b5e5"
+                android:textStyle="bold"
+                android:textSize="50sp"
+                android:gravity="center"
+                android:text="@{vm.textToShow}"
+                app:autoSizeTextType="uniform"
+                android:maxLines="1"
+                tools:text="Sample Text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+        <ImageView
+                android:id="@+id/img_back"
+                android:src="@drawable/vector_navigate_back"
+                android:layout_width="@dimen/img_fullscreen_size"
+                android:layout_height="@dimen/img_fullscreen_size"
+                android:onClick="@{()-> vm.back()}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/img_pause"
+                app:layout_constraintTop_toBottomOf="@id/fullscreen_content"
+                tools:ignore="ContentDescription"
+        />
+
+        <ImageView
+                android:id="@+id/img_pause"
+                android:src="@{vm.isPaused() ? @drawable/vector_pause : @drawable/vector_resume}"
+                android:layout_width="@dimen/img_fullscreen_size"
+                android:layout_height="@dimen/img_fullscreen_size"
+                android:onClick="@{()-> vm.changePauseState()}"
+                app:layout_constraintStart_toEndOf="@id/img_back"
+                app:layout_constraintEnd_toStartOf="@id/img_forward"
+                app:layout_constraintTop_toBottomOf="@id/fullscreen_content"
+                tools:ignore="ContentDescription"
+        />
+
+        <ImageView
+                android:id="@+id/img_forward"
+                android:src="@drawable/vector_navigate_forward"
+                android:layout_width="@dimen/img_fullscreen_size"
+                android:layout_height="@dimen/img_fullscreen_size"
+                android:onClick="@{()-> vm.forward()}"
+                app:layout_constraintStart_toEndOf="@id/img_pause"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fullscreen_content"
+                tools:ignore="ContentDescription"
+        />
+
+
+        <!-- This FrameLayout insets its children based on system windows using
+             android:fitsSystemWindows. -->
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:fitsSystemWindows="true">
+
+            <LinearLayout android:id="@+id/fullscreen_content_controls"
+                          style="?metaButtonBarStyle"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="bottom|center_horizontal"
+                          android:background="#333"
+                          android:orientation="horizontal"
+                          tools:ignore="UselessParent">
+
+
+            </LinearLayout>
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</layout>
+
